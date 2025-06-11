@@ -1,25 +1,24 @@
 package Controllers;
-import Models.LinkedList;
+
 import Models.Contact;
+import Models.LinkedList;
 import Models.Node;
-import View.ConsoleView;
 
 public class ContactManager {
-    private LinkedList<Contact<?, ?>> contacts;
+    private LinkedList<Contact<String, String>> contacts;
 
     public ContactManager() {
         contacts = new LinkedList<>();
     }
 
-    public void addContact(Contact<?, ?> contact) {
+    public void addContact(Contact<String, String> contact) {
         contacts.appendToTail(contact);
     }
 
-    public Contact<?, ?> findContactByName(String name) {
-        Node<Contact<?, ?>> current = contacts.getHead();
+    public Contact<String, String> findContactByName(String name) {
+        Node<Contact<String, String>> current = contacts.getHead();
         while (current != null) {
-            String contactName = (String) current.getValue().getName();
-            if (contactName.equalsIgnoreCase(name)) {
+            if (current.getValue().getName().equalsIgnoreCase(name)) {
                 return current.getValue();
             }
             current = current.getNext();
@@ -28,13 +27,10 @@ public class ContactManager {
     }
 
     public boolean deleteContactByName(String name) {
-        Node<Contact<?, ?>> current = contacts.getHead();
-        while (current != null) {
-            String contactName = (String) current.getValue().getName();
-            if (contactName.equalsIgnoreCase(name)) {
-                return contacts.deleteByValue(current.getValue());
-            }
-            current = current.getNext();
+        Contact<String, String> contactToDelete = findContactByName(name);
+        if (contactToDelete != null) {
+            contacts.deleteByValue(contactToDelete);
+            return true;
         }
         return false;
     }
