@@ -23,5 +23,11 @@ public class Contact <T, U> {
     @Override
     public String toString() {
         return "Contact [Name: " + name + ", Phone: " + phone + "]";
-    }    
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if( obj==null) return false;
+        if ( this == obj) return true;
+    }
 }
