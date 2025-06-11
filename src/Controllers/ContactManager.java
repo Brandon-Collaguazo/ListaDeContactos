@@ -5,18 +5,18 @@ import Models.LinkedList;
 import Models.Node;
 
 public class ContactManager {
-    private LinkedList<Contact<String, String>> contacts;
+    private LinkedList<Contact> contacts;
 
     public ContactManager() {
         contacts = new LinkedList<>();
     }
 
-    public void addContact(Contact<String, String> contact) {
+    public void addContact(Contact contact) {
         contacts.appendToTail(contact);
     }
 
-    public Contact<String, String> findContactByName(String name) {
-        Node<Contact<String, String>> current = contacts.getHead();
+    public Contact findContactByName(String name) {
+        Node<Contact> current = contacts.getHead();
         while (current != null) {
             if (current.getValue().getName().equalsIgnoreCase(name)) {
                 return current.getValue();
@@ -27,7 +27,7 @@ public class ContactManager {
     }
 
     public boolean deleteContactByName(String name) {
-        Contact<String, String> contactToDelete = findContactByName(name);
+        Contact contactToDelete = findContactByName(name);
         if (contactToDelete != null) {
             contacts.deleteByValue(contactToDelete);
             return true;
