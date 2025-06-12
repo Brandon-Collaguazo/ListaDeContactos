@@ -18,7 +18,7 @@ public class ContactManager {
     public Contact findContactByName(String name) {
         Node<Contact> current = contacts.getHead();
         while (current != null) {
-            if (current.getValue().getName().equalsIgnoreCase(name)) {
+            if(current.getValue() != null && name.equalsIgnoreCase(current.getValue().getName())) {
                 return current.getValue();
             }
             current = current.getNext();
@@ -36,6 +36,18 @@ public class ContactManager {
     }
 
     public void printList() {
-        contacts.print();
+        Node<Contact> current  = contacts.getHead();
+        if(current == null) {
+            System.out.println("No hay contacto registrados");
+            return;
+        }
+        System.out.println("\n=== Contactos Registrados ===");
+        while(current != null) {
+            if(current.getValue() != null) {
+                System.out.println(current.getValue());
+            }
+            current = current.getNext();
+        }
+        System.out.println("============================");
     }
 }

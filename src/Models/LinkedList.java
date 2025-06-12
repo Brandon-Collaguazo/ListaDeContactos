@@ -2,28 +2,26 @@ package Models;
 
 public class LinkedList<T>{
     private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public LinkedList(){
         this.head = null;
+        this.tail = null;
         this.size= 0;
 
     }
     public void appendToTail(T value){
+        Node<T> newNode = new Node<>(value);
         if (head == null) {
-            head = new Node<>(value);
-            size++;
-            return;
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.setNext(newNode);
+            tail = newNode;
         }
-        Node<T> current = head;
-        while (current.getNext() != null) {
-            current = current.getNext();
-        }
-        current.setNext(new Node<>(value));
-        size++;
-
-
     }
+
     public T findByValue(T value){
         Node<T> current = head;
         while (current != null) {
@@ -54,20 +52,11 @@ public class LinkedList<T>{
     }
     public void print() {
         Node<T> current = head;
-        if (current == null) {
-            System.out.println("La lista está vacía.");
-            return;
-        }
-        while (current != null) {
-            System.out.print(current.getValue() + " -> ");
+        while(current != null) {
+            System.out.println(current.getValue());
             current = current.getNext();
         }
-        System.out.println("END");
     }
-
-
-
-
 
     public Node<T> getHead() {
         return head;

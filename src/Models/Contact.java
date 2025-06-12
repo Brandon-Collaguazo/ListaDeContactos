@@ -1,10 +1,10 @@
 package Models;
 
-public class Contact <T, U> {
-    private T name;
-    private U phone;
+public class Contact {
+    private String name;
+    private String phone;
     
-    public Contact(T name, U phone) {
+    public Contact(String name, String phone) {
         this.name = name;
         this.phone = phone;
     }
@@ -12,11 +12,11 @@ public class Contact <T, U> {
     public Contact() {
     }
 
-    public T getName() {
+    public String getName() {
         return name;
     }
 
-    public U getPhone() {
+    public String getPhone() {
         return phone;
     }
     
@@ -26,8 +26,19 @@ public class Contact <T, U> {
     }
 
     @Override
+    public int hashCode() {
+        return (name != null) ? name.toLowerCase().hashCode() : 0;
+    }
+
+    @Override
     public boolean equals(Object obj) {
-        if( obj==null) return false;
-        if ( this == obj) return true;
+        if(this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        Contact contact = (Contact) obj;
+        if(this.name == null) {
+            return contact.name == null;
+        } else {
+            return this.name.equalsIgnoreCase(contact.name);
+        }
     }
 }

@@ -7,6 +7,11 @@ public class MenuController {
     private ContactManager contactManager;
     private ConsoleView consoleView;
 
+    public MenuController(ContactManager contactManager, ConsoleView consoleView) {
+        this.contactManager = contactManager;
+        this.consoleView = consoleView;
+    }
+
     public MenuController() {
         this.contactManager = new ContactManager();
         this.consoleView = new ConsoleView();
@@ -45,7 +50,7 @@ public class MenuController {
         } while (option != 5);
     }
 
-    private void addContact() {
+    public void addContact() {
         String name = consoleView.getInput("Ingrese el nombre del contacto: ");
         String phone = consoleView.getInput("Ingrese el teléfono del contacto: ");
         Contact newContact = new Contact(name, phone);
@@ -53,7 +58,7 @@ public class MenuController {
         consoleView.showMessage("Contacto agregado exitosamente!");
     }
 
-    private void findContact() {
+    public void findContact() {
         String name = consoleView.getInput("Ingrese el nombre a buscar: ");
         Contact contact = contactManager.findContactByName(name);
         if (contact != null) {
@@ -63,7 +68,7 @@ public class MenuController {
         }
     }
 
-    private void deleteContact() {
+    public void deleteContact() {
         String name = consoleView.getInput("Ingrese el nombre del contacto a eliminar: ");
         boolean deleted = contactManager.deleteContactByName(name);
         if (deleted) {
@@ -73,9 +78,8 @@ public class MenuController {
         }
     }
 
-    private void printContacts() {
-        consoleView.showMessage("\n--- LISTA DE CONTACTOS ---");
+    public void printContacts() {
+        consoleView.showMessage("\n=== LISTA DE CONTACTOS ===");
         contactManager.printList();
-        consoleView.showMessage("--------------------------");
     }
 }
